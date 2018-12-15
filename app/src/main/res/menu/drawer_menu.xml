@@ -9,5 +9,9 @@
         android:title="Delete all Actions"
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash" />
+    <item
+        android:title="Credits"
+        android:id="@+id/credits"
+        android:icon="@drawable/ic_social" />
 
 </menu>

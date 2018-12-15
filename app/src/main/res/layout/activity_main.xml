@@ -12,7 +12,7 @@
         android:id="@+id/main_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@drawable/animation_list">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,32 +20,51 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+
+            <Button
                 android:id="@+id/prefixOne"
-                android:layout_width="139dp"
-                android:layout_height="176dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/prefix_button_style"
+                android:fontFamily="@font/autour_one"
+                android:gravity="center"
+                android:text="Let's Go\nTo"
                 android:onClick="customPopupPrefix"
-                app:srcCompat="@drawable/go_to_button" />
+                android:textAllCaps="false"
+                android:focusable="true"
+                android:textColor="@color/black"
+                android:textSize="26dp" />
 
-            <ImageView
+            <Button
                 android:id="@+id/prefixTwo"
-                android:layout_width="139dp"
-                android:layout_height="176dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/prefix_button_style"
+                android:fontFamily="@font/autour_one"
+                android:gravity="center"
+                android:text="I Want"
                 android:onClick="customPopupPrefix"
-                app:srcCompat="@drawable/i_want_button" />
+                android:textAllCaps="false"
+                android:focusable="true"
+                android:textSize="26dp" />
 
-            <ImageView
+            <Button
                 android:id="@+id/prefixThree"
-                android:layout_width="139dp"
-                android:layout_height="176dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/prefix_button_style"
+                android:fontFamily="@font/autour_one"
+                android:gravity="center"
+                android:text="I Need"
                 android:onClick="customPopupPrefix"
-                app:srcCompat="@drawable/i_need_button" />
+                android:textAllCaps="false"
+                android:focusable="true"
+                android:textSize="26dp" />
+
+
+
         </LinearLayout>
 
         <TextView
@@ -58,6 +77,7 @@
             android:onClick="closeAction"
             android:text="message"
             android:textSize="50sp"
+            android:textColor="@color/black"
             android:visibility="invisible" />
 
     </RelativeLayout>
