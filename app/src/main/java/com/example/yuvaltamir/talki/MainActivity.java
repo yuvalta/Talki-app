@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     String newTextInput;
     String chosenPrefix;
     Boolean errorInText = false;
-    boolean isThemeChanged = false;
+    boolean isAnimationRunning = true;
 
     public static final int LENGTH_OF_ARRAY = 10;
 
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         // Animation background
         relativeLayout = findViewById(R.id.main_relative_layout);
         animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(3000);
-        animationDrawable.setExitFadeDuration(3000);
+        animationDrawable.setEnterFadeDuration(4000);
+        animationDrawable.setExitFadeDuration(4000);
 
         putDefaultValuesInArray(allAction); // Insert default values to all buttons
 
@@ -74,18 +74,19 @@ public class MainActivity extends AppCompatActivity {
 
         loadContentToSharedPreferences(allAction);
 
-        // relative layout
-        mainRelativeLayout = findViewById(R.id.main_relative_layout);
-        // imageView
+        // buttons
         prefixOne = findViewById(R.id.prefixOne);
         prefixTwo = findViewById(R.id.prefixTwo);
         prefixThree = findViewById(R.id.prefixThree);
+
         // text view
         actionText = findViewById(R.id.messageText);
+
         // dialog
         dialogPrefix = new Dialog(this);
         changeContentDialog = new Dialog(this);
         creditDialog = new Dialog(this);
+
         // drawer layout
         mDrawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -102,12 +103,14 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "All actions removed!", Toast.LENGTH_LONG).show();
                         }
 
-                        if (menuItem.getItemId() == R.id.theme && !isThemeChanged) { // changing background color
-                            mainRelativeLayout.setBackgroundColor(getResources().getColor(R.color.shadowstart));
-                            isThemeChanged = true;
-                        } else {
-                            mainRelativeLayout.setBackgroundColor(getResources().getColor(R.color.white));
-                            isThemeChanged = false;
+                        if (menuItem.getItemId() == R.id.startStopAnimation && isAnimationRunning) { // pausing / resuming background animation
+                            animationDrawable.stop();
+                            menuItem.setTitle("Resume background animation");
+                            isAnimationRunning = false;
+                        } else if(menuItem.getItemId() == R.id.startStopAnimation && !isAnimationRunning) {
+                            menuItem.setTitle("Pause background animation");
+                            animationDrawable.run();
+                            isAnimationRunning = true;
                         }
 
                         if (menuItem.getItemId() == R.id.credits) {

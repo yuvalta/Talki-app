@@ -21,7 +21,8 @@
         android:background="@color/white"
         android:onClick="customPopupAction"
         android:textAllCaps="false"
-        android:textSize="24dp"
+        android:textSize="24sp"
+        android:drawableEnd="@drawable/ic_drinking"
         android:text="content 2.1" />
 
     <Button
@@ -33,7 +34,8 @@
         android:text="content 2.2"
         android:layout_row="1"
         android:textAllCaps="false"
-        android:textSize="24dp"
+        android:drawableEnd="@drawable/ic_eat"
+        android:textSize="24sp"
         android:onClick="customPopupAction"/>
 
     <Button
@@ -45,6 +47,7 @@
         android:onClick="customPopupAction"
         android:layout_row="2"
         android:textAllCaps="false"
-        android:textSize="24dp"
+        android:drawableEnd="@drawable/ic_dance"
+        android:textSize="24sp"
         android:text="content 2.3" />
 </GridLayout>

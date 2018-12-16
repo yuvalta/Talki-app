@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Change Theme"
-        android:id="@+id/theme"
+        android:title="Pause background animation"
+        android:id="@+id/startStopAnimation"
         android:icon="@drawable/ic_change" />
     <item
         android:title="Delete all Actions"
