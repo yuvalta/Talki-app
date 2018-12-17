@@ -1,5 +1,6 @@
 package com.example.yuvaltamir.talki;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,20 +11,26 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Objects;
 
-//TODO fix the stop of animation while dialog is open - 2 different threads or AsyncTask
+//TODO fix warnings
+//TODO make an icon selector to each action
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    Spinner animationChooseSpinner;
     AnimationDrawable animationDrawable;
     RelativeLayout relativeLayout;
     Dialog dialogPrefix;
@@ -34,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     Button prefixTwo;
     Button prefixThree;
     DrawerLayout mDrawerLayout;
-    RelativeLayout mainRelativeLayout;
     Button OKButton;
     Button content1_1;
     Button content1_2;
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Animation background
         relativeLayout = findViewById(R.id.main_relative_layout);
@@ -107,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                             animationDrawable.stop();
                             menuItem.setTitle("Resume background animation");
                             isAnimationRunning = false;
-                        } else if(menuItem.getItemId() == R.id.startStopAnimation && !isAnimationRunning) {
+                        } else if (menuItem.getItemId() == R.id.startStopAnimation && !isAnimationRunning) {
                             menuItem.setTitle("Pause background animation");
                             animationDrawable.run();
                             isAnimationRunning = true;
@@ -121,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    // for the background animation while life cycle
 
     @Override
     protected void onResume() {
@@ -229,9 +238,20 @@ public class MainActivity extends AppCompatActivity {
 
             changeContentDialog.setContentView(R.layout.change_content_text);
 
+            // spinner
+
+            animationChooseSpinner = changeContentDialog.findViewById(R.id.chooseAnimation);
+            ArrayAdapter adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.animationChooseArray, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            animationChooseSpinner.setAdapter(adapter);
+            animationChooseSpinner.setOnItemSelectedListener(MainActivity.this);
+
+            // open keyboard
+
             final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
+            // changing content
             contentField = changeContentDialog.findViewById(R.id.contentField);
             OKButton = changeContentDialog.findViewById(R.id.OKButton);
             contentButton = (Button) view;
@@ -243,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
 
                     pressedButton = (Button) view;
                     newTextInput = Objects.requireNonNull(contentField.getEditText()).getText().toString().trim(); // get the text from the text box
+
 
                     if (newTextInput.isEmpty()) { // checks if the text is legal
                         errorInText = true;
@@ -256,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!errorInText) { // if the text is legal, continue
                         contentButton.setText(newTextInput); // change the text in the chosen button
 
-                        allAction[Integer.parseInt(tagOfContentButton)] = newTextInput;
+                        allAction[Integer.parseInt(tagOfContentButton) + 1] = newTextInput; // I add 1 because there was a problem in loading default value at [0] place
 
                         updateNewContentToSharedPreferences(allAction);
 
@@ -268,9 +289,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-
             changeContentDialog.show();
-
             return true;
         }
     };
@@ -289,7 +308,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadContentToSharedPreferences(String[] arrayOfActions) {
-
         SharedPreferences actions = getSharedPreferences("preferences", MODE_PRIVATE);
         String stringOfActions = actions.getString("Action", "");
         if (stringOfActions == null) // checks if the string is null
@@ -299,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < splitActions.length; i++) {
             arrayOfActions[i] = splitActions[i];
         }
-
     }
 
     public void customPopupAction(View view) {
@@ -324,5 +341,14 @@ public class MainActivity extends AppCompatActivity {
         chosenPrefix = " ";
     }
 
-}
 
+    // spinner on click
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        TextView text = (TextView) view;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+}
