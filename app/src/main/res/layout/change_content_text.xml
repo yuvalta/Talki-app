@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="370dp"
-    android:layout_height="220dp"
+    android:layout_height="280dp"
     android:layout_gravity="center">
 
     <android.support.design.widget.TextInputLayout
@@ -27,9 +26,9 @@
         app:layout_constraintVertical_bias="0.0">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/textBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Type your new content..."
             android:inputType="text"
             android:textColorHint="@color/DimGray" />
     </android.support.design.widget.TextInputLayout>
@@ -42,29 +41,45 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="OKPressed"
-        android:text="OK"
+        android:text="@string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.808"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentField"
-        app:layout_constraintVertical_bias="0.346" />
+        app:layout_constraintVertical_bias="0.906" />
 
-    <Spinner
-        android:spinnerMode="dialog"
-        android:id="@+id/chooseAnimation"
-        android:layout_width="150dp"
+    <Button
+        android:id="@+id/changeAnimationButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/OKButton"
-        app:layout_constraintHorizontal_bias="0.45"
+        android:text="@string/change_icon"
+        android:textAllCaps="false"
+        android:onClick="changeIconButtonPressed"
+        app:layout_constraintBottom_toTopOf="@+id/OKButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contentField" />
+
+    <ImageView
+        android:id="@+id/previewIcon"
+        android:visibility="invisible"
+        android:layout_width="36dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toEndOf="@+id/changeAnimationButton"
         app:layout_constraintTop_toBottomOf="@+id/contentField"
-        app:layout_constraintVertical_bias="0.41000003" />
+        app:layout_constraintVertical_bias="0.17000002"
+        app:srcCompat="@drawable/ic_01"
+        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>

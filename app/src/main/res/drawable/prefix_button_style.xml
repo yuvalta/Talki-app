@@ -18,9 +18,6 @@
                         android:topRightRadius="100dp"
                         android:bottomRightRadius="100dp"
                         android:bottomLeftRadius="20dp"/>
-                    <stroke
-                        android:color="@color/Black"
-                        android:width="2dp"/>
                     <padding
                         android:bottom="10dp"
                         android:left="10dp"

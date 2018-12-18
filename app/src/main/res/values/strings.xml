@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">Talki</string>
+    <string name="icons_made_by_srip_nfrom_www_flaticon_com">Icons made by srip  from www.flaticon.com</string>
+    <string name="ok">OK</string>
+    <string name="change_icon">Change Icon</string>
+    <string name="content1_1">content1.1</string>
+    <string name="content1_2">content1.2</string>
+    <string name="content1_3">content1.3</string>
+    <string name="content2_1">content2.1</string>
+    <string name="content2_2">content2.2</string>
+    <string name="content2_3">content2.3</string>
+    <string name="content3_1">content3.1</string>
+    <string name="content3_2">content3.2</string>
+    <string name="content3_3">content3.3</string>
 
-    <string-array name="animationChooseArray">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
 </resources>

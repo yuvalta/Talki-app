@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="300dp">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+
+            <ImageView
+                android:id="@+id/ImageView01"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_01"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/ImageView02"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_02"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/ImageView03"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_03"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/ImageView04"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_04"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/ImageView05"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_05"
+                tools:ignore="ContentDescription"/>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:onClick="iconHasChosen"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0">
+
+            <ImageView
+                android:id="@+id/ImageView06"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_06"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView07"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_07"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView08"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_08"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView09"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_09"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView10"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_10"
+                tools:ignore="ContentDescription"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0">
+
+            <ImageView
+                android:id="@+id/ImageView11"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_11"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView12"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_12"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView13"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_13"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView14"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_14"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView15"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_15"
+                tools:ignore="ContentDescription"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0">
+
+            <ImageView
+                android:id="@+id/ImageView16"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_16"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView17"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_17"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView18"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_18"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView19"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_19"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/ImageView20"
+                android:onClick="iconHasChosen"
+                android:padding="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_20"
+                tools:ignore="ContentDescription"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

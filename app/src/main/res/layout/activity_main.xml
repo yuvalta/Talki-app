@@ -2,6 +2,7 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,12 +30,12 @@
                 android:background="@drawable/prefix_button_style"
                 android:fontFamily="@font/autour_one"
                 android:gravity="center"
-                android:text="Let's Go\nTo"
+                android:text="Let's Go \nTo"
                 android:onClick="customPopupPrefix"
                 android:textAllCaps="false"
                 android:focusable="true"
                 android:textColor="@color/black"
-                android:textSize="26dp" />
+                android:textSize="26sp" />
 
             <Button
                 android:id="@+id/prefixTwo"
@@ -48,7 +49,7 @@
                 android:onClick="customPopupPrefix"
                 android:textAllCaps="false"
                 android:focusable="true"
-                android:textSize="26dp" />
+                android:textSize="26sp" />
 
             <Button
                 android:id="@+id/prefixThree"
@@ -61,9 +62,7 @@
                 android:onClick="customPopupPrefix"
                 android:textAllCaps="false"
                 android:focusable="true"
-                android:textSize="26dp" />
-
-
+                android:textSize="26sp" />
 
         </LinearLayout>
 
@@ -71,14 +70,34 @@
             android:id="@+id/messageText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
             android:alpha="100"
-            android:background="@color/white"
+            android:background="#07000000"
             android:gravity="center"
             android:onClick="closeAction"
             android:text="message"
-            android:textSize="50sp"
             android:textColor="@color/black"
+            android:textSize="50sp"
             android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/iconOfAction"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignStart="@+id/messageText"
+            android:layout_alignTop="@+id/messageText"
+            android:layout_alignBottom="@+id/messageText"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="133dp"
+            android:layout_marginTop="366dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginBottom="117dp"
+            android:src="@drawable/ic_01"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 
