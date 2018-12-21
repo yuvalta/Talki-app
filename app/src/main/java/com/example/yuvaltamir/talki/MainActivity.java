@@ -1,37 +1,31 @@
 package com.example.yuvaltamir.talki;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
-
-//TODO fix warnings
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean errorInText = false;
     Boolean isAnimationRunning = true;
     Boolean isTheUserChangedIcon = false;
+    Boolean isPressed = false;
 
     public enum ArrayToHandle {ACTIONS, ICONS}
 
@@ -142,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if (menuItem.getItemId() == R.id.credits) {
+                            creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             creditDialog.setContentView(R.layout.credit_dialog);
                             creditDialog.show();
                         }
@@ -151,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // for the background animation while life cycle
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -169,89 +164,77 @@ public class MainActivity extends AppCompatActivity {
     public void customPopupPrefix(View view) {
 
         if (view.getId() == R.id.prefixOne) {
-            chosenPrefix = "Let's Go To ";
+            chosenPrefix = "Let's Go ";
 
-            dialogPrefix.setContentView(R.layout.popup_prefix_one);
+            openPrefixDialog(R.layout.popup_prefix_one, content1_1, content1_2, content1_3,
+                    R.id.content1_1, R.id.content1_2, R.id.content1_3, 1, 2, 3);
 
-            content1_1 = dialogPrefix.findViewById(R.id.content1_1);
-            content1_2 = dialogPrefix.findViewById(R.id.content1_2);
-            content1_3 = dialogPrefix.findViewById(R.id.content1_3);
-
-            content1_1.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[1]), 0);
-            content1_2.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[2]), 0);
-            content1_3.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[3]), 0);
-
-            content1_1.setText(allAction[1]);
-            content1_2.setText(allAction[2]);
-            content1_3.setText(allAction[3]);
-
-            content1_1.setOnClickListener(onClickListener);
-            content1_1.setOnLongClickListener(onLongClickListener);
-            content1_2.setOnClickListener(onClickListener);
-            content1_2.setOnLongClickListener(onLongClickListener);
-            content1_3.setOnClickListener(onClickListener);
-            content1_3.setOnLongClickListener(onLongClickListener);
         }
 
         if (view.getId() == R.id.prefixTwo) {
             chosenPrefix = "I Want ";
 
-            dialogPrefix.setContentView(R.layout.popup_prefix_two);
-
-            content2_1 = dialogPrefix.findViewById(R.id.content2_1);
-            content2_2 = dialogPrefix.findViewById(R.id.content2_2);
-            content2_3 = dialogPrefix.findViewById(R.id.content2_3);
-
-            content2_1.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[4]), 0);
-            content2_2.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[5]), 0);
-            content2_3.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[6]), 0);
-
-            content2_1.setText(allAction[4]);
-            content2_2.setText(allAction[5]);
-            content2_3.setText(allAction[6]);
-
-            content2_1.setOnClickListener(onClickListener);
-            content2_1.setOnLongClickListener(onLongClickListener);
-            content2_2.setOnClickListener(onClickListener);
-            content2_2.setOnLongClickListener(onLongClickListener);
-            content2_3.setOnClickListener(onClickListener);
-            content2_3.setOnLongClickListener(onLongClickListener);
+            openPrefixDialog(R.layout.popup_prefix_two, content2_1, content2_2, content2_3,
+                    R.id.content2_1, R.id.content2_2, R.id.content2_3, 4, 5, 6);
         }
 
         if (view.getId() == R.id.prefixThree) {
             chosenPrefix = "I Need ";
 
-            dialogPrefix.setContentView(R.layout.popup_prefix_three);
-
-            content3_1 = dialogPrefix.findViewById(R.id.content3_1);
-            content3_2 = dialogPrefix.findViewById(R.id.content3_2);
-            content3_3 = dialogPrefix.findViewById(R.id.content3_3);
-
-            content3_1.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[7]), 0);
-            content3_2.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[8]), 0);
-            content3_3.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[9]), 0);
-
-            content3_1.setText(allAction[7]);
-            content3_2.setText(allAction[8]);
-            content3_3.setText(allAction[9]);
-
-            content3_1.setOnClickListener(onClickListener);
-            content3_1.setOnLongClickListener(onLongClickListener);
-            content3_2.setOnClickListener(onClickListener);
-            content3_2.setOnLongClickListener(onLongClickListener);
-            content3_3.setOnClickListener(onClickListener);
-            content3_3.setOnLongClickListener(onLongClickListener);
+            openPrefixDialog(R.layout.popup_prefix_three, content3_1, content3_2, content3_3,
+                    R.id.content3_1, R.id.content3_2, R.id.content3_3, 7, 8, 9);
         }
+
         dialogPrefix.show();
+    }
+
+    public void openPrefixDialog(int idOfLayout, Button B1, Button B2, Button B3, int idOfB1, int idOfB2, int idOfB3,
+                                 int place1, int place2, int place3) {
+
+        prefixOne.setVisibility(View.INVISIBLE);
+        prefixTwo.setVisibility(View.INVISIBLE);
+        prefixThree.setVisibility(View.INVISIBLE);
+        dialogPrefix.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        dialogPrefix.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        dialogPrefix.setContentView(idOfLayout); //R.layout.popup_prefix_one
+
+        dialogPrefix.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                prefixOne.setVisibility(View.VISIBLE);
+                prefixTwo.setVisibility(View.VISIBLE);
+                prefixThree.setVisibility(View.VISIBLE);
+            }
+        });
+
+        B1 = dialogPrefix.findViewById(idOfB1);
+        B2 = dialogPrefix.findViewById(idOfB2);
+        B3 = dialogPrefix.findViewById(idOfB3);
+
+        B1.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place1]), 0);
+        B2.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place2]), 0);
+        B3.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place3]), 0);
+
+        B1.setText(allAction[place1]);
+        B2.setText(allAction[place2]);
+        B3.setText(allAction[place3]);
+
+        B1.setOnClickListener(onClickListener);
+        B1.setOnLongClickListener(onLongClickListener);
+        B2.setOnClickListener(onClickListener);
+        B2.setOnLongClickListener(onLongClickListener);
+        B3.setOnClickListener(onClickListener);
+        B3.setOnLongClickListener(onLongClickListener);
     }
 
     public void putDefaultValuesInArray(String[] array, ArrayToHandle toHandle) {
 
         if (toHandle == ArrayToHandle.ACTIONS) { // default values of actions
             array[0] = " ";
-            array[1] = "The Bar";
-            array[2] = "The Stage";
-            array[3] = "The Bathroom";
+            array[1] = "Home";
+            array[2] = "To The Bar";
+            array[3] = "To The Bathroom";
             array[4] = "To Drink";
             array[5] = "To Eat";
             array[6] = "To Dance";
@@ -261,8 +244,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else {  // default values of icons
             array[0] = " ";
-            array[1] = String.valueOf(R.drawable.ic_11);
-            array[2] = String.valueOf(R.drawable.ic_16);
+            array[1] = String.valueOf(R.drawable.ic_05);
+            array[2] = String.valueOf(R.drawable.ic_11);
             array[3] = String.valueOf(R.drawable.ic_20);
             array[4] = String.valueOf(R.drawable.ic_10);
             array[5] = String.valueOf(R.drawable.ic_19);
@@ -368,7 +351,10 @@ public class MainActivity extends AppCompatActivity {
                         if (isTheUserChangedIcon) { // set the preview icon
                             contentButton.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, idOfSelectedIcon, 0);
                         }
-                        isTheUserChangedIcon = false;
+
+                        if (!isTheUserChangedIcon) {
+                            idOfSelectedIcon = parseInt(allIcons[parseInt(tagOfContentButton) + 1]);
+                        }
 
                         //add the new action / icon to each array
                         allAction[parseInt(tagOfContentButton) + 1] = newTextInput; // I add 1 because there was a problem in loading default value at [0] place
@@ -481,6 +467,8 @@ public class MainActivity extends AppCompatActivity {
     public void customPopupAction(View view) {
         final Button pressedButton = (Button) view;
         String tagOfPressedButton = (String) pressedButton.getTag();
+
+        isPressed = true;
 
         dialogPrefix.dismiss();
 

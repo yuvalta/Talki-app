@@ -4,7 +4,7 @@
     android:layout_width="300dp"
     android:layout_height="100dp"
     android:layout_gravity="center"
-    android:background="@drawable/credit_layout_style">
+    android:background="@drawable/button_style">
 
     <TextView
         android:id="@+id/credit"
