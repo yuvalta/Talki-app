@@ -18,8 +18,9 @@
 
 
             <ImageView
+                android:tag="1"
                 android:id="@+id/ImageView01"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -28,8 +29,9 @@
                 tools:ignore="ContentDescription" />
 
             <ImageView
+                android:tag="2"
                 android:id="@+id/ImageView02"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -38,8 +40,9 @@
                 tools:ignore="ContentDescription" />
 
             <ImageView
+                android:tag="3"
                 android:id="@+id/ImageView03"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -48,8 +51,9 @@
                 tools:ignore="ContentDescription" />
 
             <ImageView
+                android:tag="4"
                 android:id="@+id/ImageView04"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,8 +62,9 @@
                 tools:ignore="ContentDescription" />
 
             <ImageView
+                android:tag="5"
                 android:id="@+id/ImageView05"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -71,14 +76,15 @@
 
         <TableRow
             android:id="@+id/tableRow1"
-            android:onClick="iconHasChosen"
+            android:onClick="setIdOfSelectedIcon"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_weight="0">
 
             <ImageView
+                android:tag="6"
                 android:id="@+id/ImageView06"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -87,8 +93,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="7"
                 android:id="@+id/ImageView07"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -97,8 +104,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="8"
                 android:id="@+id/ImageView08"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -107,8 +115,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="9"
                 android:id="@+id/ImageView09"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -117,8 +126,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="10"
                 android:id="@+id/ImageView10"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -134,8 +144,9 @@
             android:layout_weight="0">
 
             <ImageView
+                android:tag="11"
                 android:id="@+id/ImageView11"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -144,8 +155,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="12"
                 android:id="@+id/ImageView12"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -154,8 +166,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="13"
                 android:id="@+id/ImageView13"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -164,8 +177,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="14"
                 android:id="@+id/ImageView14"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -174,8 +188,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="15"
                 android:id="@+id/ImageView15"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -191,8 +206,9 @@
             android:layout_weight="0">
 
             <ImageView
+                android:tag="16"
                 android:id="@+id/ImageView16"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -201,8 +217,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="17"
                 android:id="@+id/ImageView17"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -211,8 +228,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="18"
                 android:id="@+id/ImageView18"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -221,8 +239,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="19"
                 android:id="@+id/ImageView19"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -231,8 +250,9 @@
                 tools:ignore="ContentDescription"/>
 
             <ImageView
+                android:tag="20"
                 android:id="@+id/ImageView20"
-                android:onClick="iconHasChosen"
+                android:onClick="setIdOfSelectedIcon"
                 android:padding="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

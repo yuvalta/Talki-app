@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if (menuItem.getItemId() == R.id.credits) {
-                            creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            Objects.requireNonNull(creditDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             creditDialog.setContentView(R.layout.credit_dialog);
                             creditDialog.show();
                         }
@@ -161,40 +161,36 @@ public class MainActivity extends AppCompatActivity {
             animationDrawable.stop();
     }
 
-    public void customPopupPrefix(View view) {
+    public void openActionDialogAfterPressingButton(View view) {
 
         if (view.getId() == R.id.prefixOne) {
             chosenPrefix = "Let's Go ";
 
-            openPrefixDialog(R.layout.popup_prefix_one, content1_1, content1_2, content1_3,
-                    R.id.content1_1, R.id.content1_2, R.id.content1_3, 1, 2, 3);
+            openPrefixDialog(R.layout.popup_prefix_one, R.id.content1_1, R.id.content1_2, R.id.content1_3, 1, 2, 3);
 
         }
 
         if (view.getId() == R.id.prefixTwo) {
             chosenPrefix = "I Want ";
 
-            openPrefixDialog(R.layout.popup_prefix_two, content2_1, content2_2, content2_3,
-                    R.id.content2_1, R.id.content2_2, R.id.content2_3, 4, 5, 6);
+            openPrefixDialog(R.layout.popup_prefix_two, R.id.content2_1, R.id.content2_2, R.id.content2_3, 4, 5, 6);
         }
 
         if (view.getId() == R.id.prefixThree) {
             chosenPrefix = "I Need ";
 
-            openPrefixDialog(R.layout.popup_prefix_three, content3_1, content3_2, content3_3,
-                    R.id.content3_1, R.id.content3_2, R.id.content3_3, 7, 8, 9);
+            openPrefixDialog(R.layout.popup_prefix_three, R.id.content3_1, R.id.content3_2, R.id.content3_3, 7, 8, 9);
         }
-
         dialogPrefix.show();
     }
 
-    public void openPrefixDialog(int idOfLayout, Button B1, Button B2, Button B3, int idOfB1, int idOfB2, int idOfB3,
+    public void openPrefixDialog(int idOfLayout, int idOfB1, int idOfB2, int idOfB3,
                                  int place1, int place2, int place3) {
 
         prefixOne.setVisibility(View.INVISIBLE);
         prefixTwo.setVisibility(View.INVISIBLE);
         prefixThree.setVisibility(View.INVISIBLE);
-        dialogPrefix.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        Objects.requireNonNull(dialogPrefix.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialogPrefix.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         dialogPrefix.setContentView(idOfLayout); //R.layout.popup_prefix_one
@@ -208,9 +204,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        B1 = dialogPrefix.findViewById(idOfB1);
-        B2 = dialogPrefix.findViewById(idOfB2);
-        B3 = dialogPrefix.findViewById(idOfB3);
+        Button B1 = dialogPrefix.findViewById(idOfB1);
+        Button B2 = dialogPrefix.findViewById(idOfB2);
+        Button B3 = dialogPrefix.findViewById(idOfB3);
 
         B1.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place1]), 0);
         B2.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place2]), 0);
@@ -231,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     public void putDefaultValuesInArray(String[] array, ArrayToHandle toHandle) {
 
         if (toHandle == ArrayToHandle.ACTIONS) { // default values of actions
-            array[0] = " ";
+            array[0] = "";
             array[1] = "Home";
             array[2] = "To The Bar";
             array[3] = "To The Bathroom";
@@ -243,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
             array[9] = "To Puke";
         }
         else {  // default values of icons
-            array[0] = " ";
+            array[0] = "";
             array[1] = String.valueOf(R.drawable.ic_05);
             array[2] = String.valueOf(R.drawable.ic_11);
             array[3] = String.valueOf(R.drawable.ic_20);
@@ -270,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("Action", stringBuilder.toString());
             editor.apply();
         }
-        else { // add to shared preferences string
+        else if(toHandle == ArrayToHandle.ICONS){ // add to shared preferences string
             SharedPreferences icons = getSharedPreferences("iconsPreferences", MODE_PRIVATE);
             SharedPreferences.Editor editor = icons.edit();
             editor.putString("Icon", stringBuilder.toString());
@@ -295,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener onClickListener = new View.OnClickListener() { // on click - when pressing on a contentx.x button
         @Override
         public void onClick(View view) {
-            customPopupAction(view);
+            showsTheMessageOnScreen(view);
         }
     };
 
@@ -388,67 +384,67 @@ public class MainActivity extends AppCompatActivity {
         iconsDialog.show();
     }
 
-    public void iconHasChosen (View view) { // when pressing on one of the icons from the table view
-        switch (view.getId())
+    public void setIdOfSelectedIcon(View view) { // when pressing on one of the icons from the table view
+        switch (parseInt(view.getTag().toString()))
         {
-            case R.id.ImageView01:
+            case 1:
                 idOfSelectedIcon = R.drawable.ic_01;
                 break;
-            case R.id.ImageView02:
+            case 2:
                 idOfSelectedIcon = R.drawable.ic_02;
                 break;
-            case R.id.ImageView03:
+            case 3:
                 idOfSelectedIcon = R.drawable.ic_03;
                 break;
-            case R.id.ImageView04:
+            case 4:
                 idOfSelectedIcon = R.drawable.ic_04;
                 break;
-            case R.id.ImageView05:
+            case 5:
                 idOfSelectedIcon = R.drawable.ic_05;
                 break;
-            case R.id.ImageView06:
+            case 6:
                 idOfSelectedIcon = R.drawable.ic_06;
                 break;
-            case R.id.ImageView07:
+            case 7:
                 idOfSelectedIcon = R.drawable.ic_07;
                 break;
-            case R.id.ImageView08:
+            case 8:
                 idOfSelectedIcon = R.drawable.ic_08;
                 break;
-            case R.id.ImageView09:
+            case 9:
                 idOfSelectedIcon = R.drawable.ic_09;
                 break;
-            case R.id.ImageView10:
+            case 10:
                 idOfSelectedIcon = R.drawable.ic_10;
                 break;
-            case R.id.ImageView11:
+            case 11:
                 idOfSelectedIcon = R.drawable.ic_11;
                 break;
-            case R.id.ImageView12:
+            case 12:
                 idOfSelectedIcon = R.drawable.ic_12;
                 break;
-            case R.id.ImageView13:
+            case 13:
                 idOfSelectedIcon = R.drawable.ic_13;
                 break;
-            case R.id.ImageView14:
+            case 14:
                 idOfSelectedIcon = R.drawable.ic_14;
                 break;
-            case R.id.ImageView15:
+            case 15:
                 idOfSelectedIcon = R.drawable.ic_15;
                 break;
-            case R.id.ImageView16:
+            case 16:
                 idOfSelectedIcon = R.drawable.ic_16;
                 break;
-            case R.id.ImageView17:
+            case 17:
                 idOfSelectedIcon = R.drawable.ic_17;
                 break;
-            case R.id.ImageView18:
+            case 18:
                 idOfSelectedIcon = R.drawable.ic_18;
                 break;
-            case R.id.ImageView19:
+            case 19:
                 idOfSelectedIcon = R.drawable.ic_19;
                 break;
-            case R.id.ImageView20:
+            case 20:
                 idOfSelectedIcon = R.drawable.ic_20;
                 break;
         }
@@ -464,7 +460,7 @@ public class MainActivity extends AppCompatActivity {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
-    public void customPopupAction(View view) {
+    public void showsTheMessageOnScreen(View view) {
         final Button pressedButton = (Button) view;
         String tagOfPressedButton = (String) pressedButton.getTag();
 
@@ -483,7 +479,7 @@ public class MainActivity extends AppCompatActivity {
         iconOfAction.setVisibility(View.VISIBLE);
     }
 
-    public void closeAction(View view) {
+    public void closeMessage(View view) {
         prefixOne.setVisibility(View.VISIBLE);
         prefixTwo.setVisibility(View.VISIBLE);
         prefixThree.setVisibility(View.VISIBLE);
