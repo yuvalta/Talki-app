@@ -58,7 +58,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/change_icon"
         android:textAllCaps="false"
-        android:onClick="changeIconButtonPressed"
+
         app:layout_constraintBottom_toTopOf="@+id/okButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     String chosenPrefix;
     int idOfSelectedIcon;
     CustomDialog customDialog; // global dialog
+    CustomDialog prefixCustomDialog;
     Boolean errorInText = false;
     Boolean isAnimationRunning = true;
     Boolean isTheUserChangedIcon = false;
@@ -126,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
                             isAnimationRunning = true;
                         }
                         if (menuItem.getItemId() == R.id.credits) {
-                            final CustomDialog customDialog = new CustomDialog(MainActivity.this, R.layout.credit_dialog);
-                            customDialog.show();
+                            final CustomDialog creditsCustomDialog = new CustomDialog(MainActivity.this, R.layout.credit_dialog);
+                            creditsCustomDialog.show();
                         }
                         return true;
                     }
@@ -174,9 +175,9 @@ public class MainActivity extends AppCompatActivity {
         prefixTwo.setVisibility(View.INVISIBLE);
         prefixThree.setVisibility(View.INVISIBLE);
 
-        customDialog = new CustomDialog(MainActivity.this , idOfLayout);
+        prefixCustomDialog = new CustomDialog(MainActivity.this , idOfLayout);
 
-        customDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        prefixCustomDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
                 prefixOne.setVisibility(View.VISIBLE);
@@ -185,9 +186,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button B1 = customDialog.findViewById(idOfB1);
-        Button B2 = customDialog.findViewById(idOfB2);
-        Button B3 = customDialog.findViewById(idOfB3);
+        Button B1 = prefixCustomDialog.findViewById(idOfB1);
+        Button B2 = prefixCustomDialog.findViewById(idOfB2);
+        Button B3 = prefixCustomDialog.findViewById(idOfB3);
 
         B1.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place1]), 0);
         B2.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place2]), 0);
@@ -197,14 +198,16 @@ public class MainActivity extends AppCompatActivity {
         B2.setText(allAction[place2]);
         B3.setText(allAction[place3]);
 
+        prefixCustomDialog.dismiss();
+
         B1.setOnClickListener(onClickListener);
         B1.setOnLongClickListener(onLongClickListener);
         B2.setOnClickListener(onClickListener);
         B2.setOnLongClickListener(onLongClickListener);
         B3.setOnClickListener(onClickListener);
         B3.setOnLongClickListener(onLongClickListener);
-        
-        return customDialog;
+
+        return prefixCustomDialog;
     }
 
     public void putDefaultValuesInArray(String[] array, ArrayToHandle toHandle) {
@@ -270,21 +273,22 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener onClickListener = new View.OnClickListener() { // on click - when pressing on a contentx.x button
         @Override
         public void onClick(View view) {
-            showsTheMessageOnScreen(view);
+            showsTheMessageOnScreen(view, prefixCustomDialog);
         }
     };
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() { // on long click - when pressing on a contentx.x button
         @Override
         public boolean onLongClick(View view) {
-            final CustomDialog customDialog = new CustomDialog(MainActivity.this, R.layout.change_content_text);
+            final CustomDialog changeContentCustomDialog = new CustomDialog(MainActivity.this, R.layout.change_content_text);
 
             openOrCloseKeyboard(keyboardAction.OPEN);
 
-            contentField = customDialog.findViewById(R.id.contentField); // changing content
-            okButton = customDialog.findViewById(R.id.okButton);
-            previewIcon = customDialog.findViewById(R.id.previewIcon);
-            EditText textBox = customDialog.findViewById(R.id.textBox);
+            contentField = changeContentCustomDialog.findViewById(R.id.contentField); // changing content
+            okButton = changeContentCustomDialog.findViewById(R.id.okButton);
+            changeAnimationButton = changeContentCustomDialog.findViewById(R.id.changeAnimationButton);
+            previewIcon = changeContentCustomDialog.findViewById(R.id.previewIcon);
+            EditText textBox = changeContentCustomDialog.findViewById(R.id.textBox);
 
             contentButton = (Button) view;
 
@@ -295,6 +299,14 @@ public class MainActivity extends AppCompatActivity {
 
             textBox.setText(contentButton.getText().toString()); // preview of the text at the pressed button
             textBox.setSelection(textBox.getText().length()); // set cursor to end of text
+
+            changeAnimationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changeIconButtonPressed(view);
+                }
+            });
+
 
             okButton.setOnClickListener(new View.OnClickListener() { // when pressing OK
                 @Override
@@ -312,13 +324,14 @@ public class MainActivity extends AppCompatActivity {
                     if (!errorInText) { // if the text is legal, continue
                         contentButton.setText(newTextInput); // change the text in the chosen button
 
-                        if (isTheUserChangedIcon) { // set the preview icon
-                            contentButton.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, idOfSelectedIcon, 0);
-                        }
-
                         if (!isTheUserChangedIcon) {
                             idOfSelectedIcon = parseInt(allIcons[parseInt(tagOfContentButton) + 1]);
                         }
+                        else if (isTheUserChangedIcon) { // set the preview icon
+                            contentButton.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, idOfSelectedIcon, 0);
+                            isTheUserChangedIcon = false;
+                        }
+
                         allAction[parseInt(tagOfContentButton) + 1] = newTextInput; // I add 1 because there was a problem in loading default value at [0] place
                         allIcons[parseInt(tagOfContentButton) + 1] = String.valueOf(idOfSelectedIcon);
 
@@ -326,13 +339,13 @@ public class MainActivity extends AppCompatActivity {
                         updateNewContentToSharedPreferences(allIcons, ArrayToHandle.ICONS);
 
                         openOrCloseKeyboard(keyboardAction.CLOSE);
-                        customDialog.dismiss();
+                        changeContentCustomDialog.dismiss();
                     } else {
                         errorInText = false;
                     }
                 }
             });
-            customDialog.show();
+            changeContentCustomDialog.show();
             return true;
         }
     };
@@ -414,6 +427,7 @@ public class MainActivity extends AppCompatActivity {
         previewIcon.setVisibility(View.VISIBLE);
 
         customDialog.dismiss();
+//        customDialog = null;
 
         openOrCloseKeyboard(keyboardAction.OPEN);
     }
@@ -426,13 +440,13 @@ public class MainActivity extends AppCompatActivity {
             imm.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
     }
 
-    public void showsTheMessageOnScreen(View view) {
+    public void showsTheMessageOnScreen(View view, CustomDialog previousDialog) {
         final Button pressedButton = (Button) view;
         String tagOfPressedButton = (String) pressedButton.getTag();
 
         isPressed = true;
 
-        customDialog.dismiss();
+        previousDialog.dismiss(); ////////
 
         prefixOne.setVisibility(View.INVISIBLE);
         prefixTwo.setVisibility(View.INVISIBLE);
