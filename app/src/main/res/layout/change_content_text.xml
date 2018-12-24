@@ -34,7 +34,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/OKButton"
+        android:id="@+id/okButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
         android:text="@string/change_icon"
         android:textAllCaps="false"
         android:onClick="changeIconButtonPressed"
-        app:layout_constraintBottom_toTopOf="@+id/OKButton"
+        app:layout_constraintBottom_toTopOf="@+id/okButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentField" />

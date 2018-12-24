@@ -29,20 +29,17 @@ import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int LENGTH_OF_ARRAY = 10;
     AnimationDrawable animationDrawable;
     RelativeLayout relativeLayout;
-    DrawerLayout mDrawerLayout;
+    DrawerLayout drawerLayout;
     ImageView previewIcon;
     ImageView iconOfAction;
-    Dialog dialogPrefix;
-    Dialog changeContentDialog;
-    Dialog creditDialog;
-    Dialog iconsDialog;
-    TextView actionText;
+    TextView actionToShowText;
     Button prefixOne;
     Button prefixTwo;
     Button prefixThree;
-    Button OKButton;
+    Button okButton;
     Button content1_1;
     Button content1_2;
     Button content1_3;
@@ -59,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
     String newTextInput;
     String chosenPrefix;
     int idOfSelectedIcon;
+    CustomDialog customDialog; // global dialog
     Boolean errorInText = false;
     Boolean isAnimationRunning = true;
     Boolean isTheUserChangedIcon = false;
     Boolean isPressed = false;
 
     public enum ArrayToHandle {ACTIONS, ICONS}
-
-    public static final int LENGTH_OF_ARRAY = 10;
+    public enum keyboardAction {OPEN, CLOSE}
 
     public String[] allAction = new String[LENGTH_OF_ARRAY];
     public String[] allIcons = new String[LENGTH_OF_ARRAY];
@@ -97,24 +94,18 @@ public class MainActivity extends AppCompatActivity {
         prefixThree = findViewById(R.id.prefixThree);
 
         // text view of action + ImageView of icon
-        actionText = findViewById(R.id.messageText);
+        actionToShowText = findViewById(R.id.messageText);
         iconOfAction = findViewById(R.id.iconOfAction);
 
-        // dialog
-        dialogPrefix = new Dialog(this);
-        changeContentDialog = new Dialog(this);
-        creditDialog = new Dialog(this);
-        iconsDialog = new Dialog(this);
-
         // drawer layout
-        mDrawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
 
                         if (menuItem.getItemId() == R.id.delete) { // return to default values
                             actions.edit().clear().apply();
@@ -125,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), "All actions removed!", Toast.LENGTH_LONG).show();
                         }
-
                         if (menuItem.getItemId() == R.id.startStopAnimation && isAnimationRunning) { // pausing / resuming background animation
                             animationDrawable.stop();
                             menuItem.setTitle("Resume background animation");
@@ -135,17 +125,14 @@ public class MainActivity extends AppCompatActivity {
                             animationDrawable.run();
                             isAnimationRunning = true;
                         }
-
                         if (menuItem.getItemId() == R.id.credits) {
-                            Objects.requireNonNull(creditDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                            creditDialog.setContentView(R.layout.credit_dialog);
-                            creditDialog.show();
+                            final CustomDialog customDialog = new CustomDialog(MainActivity.this, R.layout.credit_dialog);
+                            customDialog.show();
                         }
                         return true;
                     }
                 });
     }
-
     // for the background animation while life cycle
     @Override
     protected void onResume() {
@@ -162,40 +149,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openActionDialogAfterPressingButton(View view) {
-
+        Dialog whichCustomDialogPressed = null;
         if (view.getId() == R.id.prefixOne) {
             chosenPrefix = "Let's Go ";
-
-            openPrefixDialog(R.layout.popup_prefix_one, R.id.content1_1, R.id.content1_2, R.id.content1_3, 1, 2, 3);
-
+            whichCustomDialogPressed = openPrefixDialog(R.layout.popup_prefix_one, R.id.content1_1, R.id.content1_2, R.id.content1_3, 1, 2, 3);
         }
-
         if (view.getId() == R.id.prefixTwo) {
             chosenPrefix = "I Want ";
-
-            openPrefixDialog(R.layout.popup_prefix_two, R.id.content2_1, R.id.content2_2, R.id.content2_3, 4, 5, 6);
+            whichCustomDialogPressed = openPrefixDialog(R.layout.popup_prefix_two, R.id.content2_1, R.id.content2_2, R.id.content2_3, 4, 5, 6);
         }
-
         if (view.getId() == R.id.prefixThree) {
             chosenPrefix = "I Need ";
-
-            openPrefixDialog(R.layout.popup_prefix_three, R.id.content3_1, R.id.content3_2, R.id.content3_3, 7, 8, 9);
+            whichCustomDialogPressed = openPrefixDialog(R.layout.popup_prefix_three, R.id.content3_1, R.id.content3_2, R.id.content3_3, 7, 8, 9);
         }
-        dialogPrefix.show();
+        try {
+            whichCustomDialogPressed.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void openPrefixDialog(int idOfLayout, int idOfB1, int idOfB2, int idOfB3,
-                                 int place1, int place2, int place3) {
-
+    public CustomDialog openPrefixDialog(int idOfLayout, int idOfB1, int idOfB2, int idOfB3, int place1, int place2, int place3) {
         prefixOne.setVisibility(View.INVISIBLE);
         prefixTwo.setVisibility(View.INVISIBLE);
         prefixThree.setVisibility(View.INVISIBLE);
-        Objects.requireNonNull(dialogPrefix.getWindow()).clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        dialogPrefix.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        dialogPrefix.setContentView(idOfLayout); //R.layout.popup_prefix_one
+        customDialog = new CustomDialog(MainActivity.this , idOfLayout);
 
-        dialogPrefix.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        customDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
                 prefixOne.setVisibility(View.VISIBLE);
@@ -204,9 +185,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button B1 = dialogPrefix.findViewById(idOfB1);
-        Button B2 = dialogPrefix.findViewById(idOfB2);
-        Button B3 = dialogPrefix.findViewById(idOfB3);
+        Button B1 = customDialog.findViewById(idOfB1);
+        Button B2 = customDialog.findViewById(idOfB2);
+        Button B3 = customDialog.findViewById(idOfB3);
 
         B1.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place1]), 0);
         B2.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, Integer.valueOf(allIcons[place2]), 0);
@@ -222,10 +203,11 @@ public class MainActivity extends AppCompatActivity {
         B2.setOnLongClickListener(onLongClickListener);
         B3.setOnClickListener(onClickListener);
         B3.setOnLongClickListener(onLongClickListener);
+        
+        return customDialog;
     }
 
     public void putDefaultValuesInArray(String[] array, ArrayToHandle toHandle) {
-
         if (toHandle == ArrayToHandle.ACTIONS) { // default values of actions
             array[0] = "";
             array[1] = "Home";
@@ -274,18 +256,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void loadContentToSharedPreferences(String[] arrayOfActions, String s, String nameOfPreferences) {
-
+    public void loadContentToSharedPreferences(String[] arrayOfActions, String nameOfSharedPreferencesArray, String nameOfPreferences) {
         SharedPreferences elements = getSharedPreferences(nameOfPreferences, MODE_PRIVATE);
 
-        String stringOfElements = elements.getString(s, "");
+        String stringOfElements = elements.getString(nameOfSharedPreferencesArray, "");
         if (stringOfElements == null) // checks if the string is null
             throw new AssertionError();
         String[] splitElements = stringOfElements.split(","); // split the string from the shared preferences string
 
-
-        // enter each word to the array of content / icon --> coping automatically the arrays
-        System.arraycopy(splitElements, 0, arrayOfActions, 0, splitElements.length);
+        System.arraycopy(splitElements, 0, arrayOfActions, 0, splitElements.length); // enter each word to the array of content / icon --> coping automatically the arrays
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() { // on click - when pressing on a contentx.x button
@@ -298,49 +277,38 @@ public class MainActivity extends AppCompatActivity {
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() { // on long click - when pressing on a contentx.x button
         @Override
         public boolean onLongClick(View view) {
+            final CustomDialog customDialog = new CustomDialog(MainActivity.this, R.layout.change_content_text);
 
-            // open layout of change content
-            changeContentDialog.setContentView(R.layout.change_content_text);
+            openOrCloseKeyboard(keyboardAction.OPEN);
 
-            // open keyboard
-            final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-
-            // changing content
-            contentField = changeContentDialog.findViewById(R.id.contentField);
-            OKButton = changeContentDialog.findViewById(R.id.OKButton);
-            previewIcon = changeContentDialog.findViewById(R.id.previewIcon);
-
-            EditText textBox = changeContentDialog.findViewById(R.id.textBox);
+            contentField = customDialog.findViewById(R.id.contentField); // changing content
+            okButton = customDialog.findViewById(R.id.okButton);
+            previewIcon = customDialog.findViewById(R.id.previewIcon);
+            EditText textBox = customDialog.findViewById(R.id.textBox);
 
             contentButton = (Button) view;
 
             final String tagOfContentButton = (String) contentButton.getTag();
 
-            // preview of the icon before changing it
-            previewIcon.setImageResource(parseInt(allIcons[parseInt(tagOfContentButton) + 1]));
+            previewIcon.setImageResource(parseInt(allIcons[parseInt(tagOfContentButton) + 1]));  // preview of the icon before changing it
             previewIcon.setVisibility(View.VISIBLE);
 
-            // preview of the text at the pressed button
-            textBox.setText(contentButton.getText().toString());
+            textBox.setText(contentButton.getText().toString()); // preview of the text at the pressed button
             textBox.setSelection(textBox.getText().length()); // set cursor to end of text
 
-            OKButton.setOnClickListener(new View.OnClickListener() { // when pressing OK
+            okButton.setOnClickListener(new View.OnClickListener() { // when pressing OK
                 @Override
                 public void onClick(View view) {
-
                     pressedButton = (Button) view;
                     newTextInput = Objects.requireNonNull(contentField.getEditText()).getText().toString().trim(); // get the text from the text box
 
                     if (newTextInput.isEmpty()) { // checks if the text is legal
                         errorInText = true;
                         contentField.setError("Field can't be empty");
-
                     } else if (newTextInput.length() > 30) {
                         errorInText = true;
                         contentField.setError("Text too long");
                     }
-
                     if (!errorInText) { // if the text is legal, continue
                         contentButton.setText(newTextInput); // change the text in the chosen button
 
@@ -351,37 +319,29 @@ public class MainActivity extends AppCompatActivity {
                         if (!isTheUserChangedIcon) {
                             idOfSelectedIcon = parseInt(allIcons[parseInt(tagOfContentButton) + 1]);
                         }
-
-                        //add the new action / icon to each array
                         allAction[parseInt(tagOfContentButton) + 1] = newTextInput; // I add 1 because there was a problem in loading default value at [0] place
                         allIcons[parseInt(tagOfContentButton) + 1] = String.valueOf(idOfSelectedIcon);
 
-                        //update shared preferences
                         updateNewContentToSharedPreferences(allAction, ArrayToHandle.ACTIONS);
                         updateNewContentToSharedPreferences(allIcons, ArrayToHandle.ICONS);
 
-                        imm.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0); // close keyboard
-
-                        changeContentDialog.dismiss();
+                        openOrCloseKeyboard(keyboardAction.CLOSE);
+                        customDialog.dismiss();
                     } else {
                         errorInText = false;
                     }
                 }
             });
-            changeContentDialog.show();
-
+            customDialog.show();
             return true;
         }
     };
 
     public void changeIconButtonPressed(View view) { // opens table of icons
-
-        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); // close keyboard
-        imm.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
-
-        iconsDialog.setContentView(R.layout.table_of_animations);
-
-        iconsDialog.show();
+        openOrCloseKeyboard(keyboardAction.CLOSE);
+        CustomDialog tempCustomDialog = new CustomDialog(MainActivity.this, R.layout.table_of_animations);
+        tempCustomDialog.show();
+        customDialog = tempCustomDialog;
     }
 
     public void setIdOfSelectedIcon(View view) { // when pressing on one of the icons from the table view
@@ -448,16 +408,22 @@ public class MainActivity extends AppCompatActivity {
                 idOfSelectedIcon = R.drawable.ic_20;
                 break;
         }
-
         isTheUserChangedIcon = true;
 
         previewIcon.setImageResource(idOfSelectedIcon);
         previewIcon.setVisibility(View.VISIBLE);
 
-        iconsDialog.dismiss();
+        customDialog.dismiss();
 
-        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); // show keyboard
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        openOrCloseKeyboard(keyboardAction.OPEN);
+    }
+
+    public void openOrCloseKeyboard(keyboardAction keyboardAction) {
+        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (keyboardAction == MainActivity.keyboardAction.OPEN)
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        else if (keyboardAction == MainActivity.keyboardAction.CLOSE)
+            imm.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
     }
 
     public void showsTheMessageOnScreen(View view) {
@@ -466,16 +432,16 @@ public class MainActivity extends AppCompatActivity {
 
         isPressed = true;
 
-        dialogPrefix.dismiss();
+        customDialog.dismiss();
 
         prefixOne.setVisibility(View.INVISIBLE);
         prefixTwo.setVisibility(View.INVISIBLE);
         prefixThree.setVisibility(View.INVISIBLE);
 
-        actionText.setText(chosenPrefix + pressedButton.getText().toString()); // show the final action on screen
+        actionToShowText.setText(chosenPrefix + pressedButton.getText().toString()); // show the final action on screen
         iconOfAction.setImageResource(parseInt(allIcons[parseInt(tagOfPressedButton) + 1])); // show the icon on the screen
 
-        actionText.setVisibility(View.VISIBLE);
+        actionToShowText.setVisibility(View.VISIBLE);
         iconOfAction.setVisibility(View.VISIBLE);
     }
 
@@ -484,10 +450,10 @@ public class MainActivity extends AppCompatActivity {
         prefixTwo.setVisibility(View.VISIBLE);
         prefixThree.setVisibility(View.VISIBLE);
 
-        actionText.setVisibility(View.INVISIBLE);
+        actionToShowText.setVisibility(View.INVISIBLE);
         iconOfAction.setVisibility(View.INVISIBLE);
 
-        actionText.setText(" ");
+        actionToShowText.setText(" ");
         chosenPrefix = " ";
     }
 }
