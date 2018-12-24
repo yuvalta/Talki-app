@@ -1,0 +1,35 @@
+public void buttonClicked(View view) { // onClick function for all the options
+
+        messageText = findViewById(R.id.message);
+
+        PopupMenu popup = new PopupMenu(this, view, Gravity.CLIP_HORIZONTAL);
+        MenuInflater inflater = popup.getMenuInflater();
+
+        if(view.getId() == R.id.one){
+            inflater.inflate(R.menu.popup_ineed, popup.getMenu());
+        }
+
+        if(view.getId() == R.id.two){
+            inflater.inflate(R.menu.popup_ineed, popup.getMenu());
+        }
+
+        if(view.getId() == R.id.three){
+            inflater.inflate(R.menu.popup_iwant, popup.getMenu());
+        }
+        popup.show();
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                messageText.setVisibility(View.VISIBLE);
+                messageText.setText(item.getTitle());
+                return true;
+            }
+        });
+    }
+
+    public void returnToMain(View view){
+
+        messageText.setVisibility(View.INVISIBLE);
+        messageText.setText(" ");
+
+    }
