@@ -9,16 +9,17 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="170dp"
-        android:layout_height="80dp"
-        android:background="@drawable/talki_logo_big" />
+        android:layout_gravity="end"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:background="@drawable/transperent_logo_black" />
 
     <TextView
         android:id="@+id/ver_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="Version 1.0 Created by YT"
+        android:text="Created by YT"
         android:textColor="@color/white"
         android:textSize="15sp" />
 

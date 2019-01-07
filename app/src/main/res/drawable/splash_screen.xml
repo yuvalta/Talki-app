@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- The background color, preferably the same as your normal theme -->
+    <item android:drawable="@android:color/black"/>
+    <item>
+        <bitmap
+            android:src="@drawable/talki_splash"
+            android:gravity="center"/>
+    </item>
+</layer-list>

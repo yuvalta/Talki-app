@@ -10,6 +10,10 @@
         android:id="@+id/delete"
         android:icon="@drawable/ic_trash" />
     <item
+        android:title="Load tutorial again"
+        android:id="@+id/tutorialAgain"
+        android:icon="@drawable/ic_autorenew_black_24dp" />
+    <item
         android:title="Credits"
         android:id="@+id/credits"
         android:icon="@drawable/ic_social" />

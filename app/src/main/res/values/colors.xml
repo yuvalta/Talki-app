@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="indicator_unselected">#848484</color>
+    <color name="indicator_selected">#FFFFFF</color>
     <color name="purple_500">#9C27B0</color>
     <color name="deep_purple_500">#673AB7</color>
     <color name="indigo_500">#3F51B5</color>

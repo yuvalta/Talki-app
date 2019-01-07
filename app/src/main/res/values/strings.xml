@@ -12,5 +12,16 @@
     <string name="content3_1">content3.1</string>
     <string name="content3_2">content3.2</string>
     <string name="content3_3">content3.3</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="finish">Got it!</string>
+    <string name="title_activity_on_boarding">on_boarding</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="slide_0_description">"Welcome to Talki! \n Talki helps you talk to your friends in loud places (bars, parties, concerts...)\n All you need to do is follow this quick tutorial"</string>
+    <string name="slide_1_description">"Here you have 3 common prefixes of sentences. \n Press on one of the option to open the next window"</string>
+    <string name="slide_2_description">"After pressing on the preferred prefix, you can choose from the options above. \n LONG PRESS let you change the default text to your own text :) "</string>
+    <string name="slide_3_description">"According to your choice, the sentence will display on your screen. \n Show it to your friends for easy communication!"</string>
+    <string name="slide_4_description">"You can erase all of your changes and restore the text to default"</string>
 
 </resources>
